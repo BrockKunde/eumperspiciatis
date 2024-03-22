@@ -1,0 +1,79 @@
+---
+sidebar_position: 20
+description: Using Foscia as a simple HTTP client.
+---
+
+import Link from '@docusaurus/Link';
+import ShellCommand from '@site/src/components/ShellCommand';
+
+# HTTP
+
+:::tip What you'll learn
+
+- Configuring your action factory to only make HTTP request
+- Using Foscia as an HTTP client
+
+:::
+
+## Setup
+
+You can use Foscia as a simple HTTP client (just like Axios). For this, you can
+configure an HTTP client action factory.
+
+:::info
+
+If you are using JSON REST or JSON:API implementations, you can already use your
+action factory as an HTTP client.
+
+:::
+
+### CLI (recommended)
+
+You can get started for Foscia as an HTTP client using the
+[`@foscia/cli`](/docs/digging-deeper/cli).
+
+<ShellCommand command="foscia init src/http --usage=http" />
+
+### Manually
+
+```typescript title="action.ts"
+import { makeActionFactory } from '@foscia/core';
+import { makeHttpAdapter } from '@foscia/http';
+
+export default makeActionFactory({
+  ...makeHttpAdapter({
+    baseURL: 'https://example.com',
+  }),
+});
+```
+
+## Usage
+
+Once your action factory is ready, sending HTTP request is pretty easy using
+provided enhancers ([`makeGet`](/docs/reference/actions-enhancers#makeget),
+[`makePost`](/docs/reference/actions-enhancers#makepost), etc.). Running a
+request is done by [`raw`](/docs/reference/actions-runners#raw) runner, which
+will retrieve a fetch `Response` object. You can also pass a callback to `raw`
+to retrieve a value from the `Response` object.
+
+```typescript
+import { makeGet, makePost } from '@foscia/http';
+import action from './action';
+
+// GET https://example.com/
+const response = await action().use(makeGet('/')).run(raw());
+
+// GET https://example.com/api/posts (and get JSON payload)
+const data = await action()
+  .use(
+    makePost('/api/posts', {
+      data: { title: 'Hello World!' },
+    }),
+  )
+  .run(raw((response) => response.json()));
+```
+
+## Reference
+
+- [Dedicated enhancers API](/docs/reference/actions-enhancers#fosciahttp)
+- [Implementation and configuration guide](/docs/digging-deeper/implementations/http)

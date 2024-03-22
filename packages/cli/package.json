@@ -1,0 +1,51 @@
+{
+  "name": "@foscia/cli",
+  "type": "module",
+  "version": "0.6.2",
+  "license": "MIT",
+  "author": "Paul Thébaud",
+  "description": "Type safe, modular and intuitive API/data client for JS/TS.",
+  "homepage": "https://foscia.dev",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/foscia-dev/foscia.git",
+    "directory": "packages/cli"
+  },
+  "bugs": {
+    "url": "https://github.com/foscia-dev/foscia/issues"
+  },
+  "sideEffects": false,
+  "files": [
+    "dist/*"
+  ],
+  "bin": {
+    "foscia": "./dist/index.cjs"
+  },
+  "scripts": {
+    "release": "release-it"
+  },
+  "dependencies": {
+    "@inquirer/prompts": "^3.3.0",
+    "boxen": "^7.1.1",
+    "cli-highlight": "^2.1.11",
+    "execa": "^8.0.1",
+    "is-unicode-supported": "^2.0.0",
+    "lodash-es": "^4.17.21",
+    "ora": "^7.0.1",
+    "picocolors": "^1.0.0",
+    "pluralize": "^8.0.0",
+    "yargs": "^17.7.2"
+  },
+  "devDependencies": {
+    "@types/lodash-es": "^4.17.11",
+    "@types/node": "^20.9.0",
+    "@types/pluralize": "^0.0.33",
+    "@types/yargs": "^17.0.31"
+  },
+  "engines": {
+    "node": ">=16"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "name": "FosciaSerialization",
+  "formats": [
+    "esm",
+    "cjs",
+    "global"
+  ]
+}
